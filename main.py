@@ -11,7 +11,7 @@ class InterFace(QMainWindow):
         self.ui = mainwindow.Ui_MainWindow()
         self.ui.setupUi(self)
         self.ser = m_serial.MySerial()
-        self.ids = [0,1,2,3,4,5]
+        self.ids = [6,1,2,3,4,5]
         self.pos = [900,900,900,900,900,900]
         self.cnt = 6
         self.time_move = 0
@@ -26,6 +26,8 @@ class InterFace(QMainWindow):
         #波特率下拉选单初始化
         bps_list = [str(i) for i in setting.bps_list]
         self.ui.bps_comboBox.addItems(bps_list)
+        self.ser.bps = setting.bps_list[self.ui.bps_comboBox.currentIndex()]
+
         #滑动条和spinbox上下限初始化
         self.ui.finger_0_horizontalSlider.setMinimum(900)
         self.ui.finger_1_horizontalSlider.setMinimum(900)
@@ -55,6 +57,8 @@ class InterFace(QMainWindow):
         self.ui.finger_4_spinbox.setMaximum(2000)
         self.ui.finger_5_spinbox.setMaximum(2000)
 
+        self.ui.time_spinBox.setMinimum(0)
+        self.ui.time_spinBox.setMaximum(2000)
         '''
         槽函数与信号连接
         '''
@@ -68,7 +72,8 @@ class InterFace(QMainWindow):
         self.ui.com_connect_pushButton.clicked.connect(self.com_connect)
         self.ui.com_close_pushButton.clicked.connect(self.com_close)
 
-
+        #移动用时spinbox改变
+        self.ui.time_spinBox.valueChanged.connect(self.time_move_set)
         #手势pos改变
         self.ui.finger_0_horizontalSlider.valueChanged.connect(self.pos_update_slider)
         self.ui.finger_1_horizontalSlider.valueChanged.connect(self.pos_update_slider)
@@ -76,7 +81,7 @@ class InterFace(QMainWindow):
         self.ui.finger_3_horizontalSlider.valueChanged.connect(self.pos_update_slider)
         self.ui.finger_4_horizontalSlider.valueChanged.connect(self.pos_update_slider)
         self.ui.finger_5_horizontalSlider.valueChanged.connect(self.pos_update_slider)
-        #
+
         self.ui.finger_0_spinbox.valueChanged.connect(self.pos_update_spinbox)
         self.ui.finger_1_spinbox.valueChanged.connect(self.pos_update_spinbox)
         self.ui.finger_2_spinbox.valueChanged.connect(self.pos_update_spinbox)
@@ -84,6 +89,13 @@ class InterFace(QMainWindow):
         self.ui.finger_4_spinbox.valueChanged.connect(self.pos_update_spinbox)
         self.ui.finger_5_spinbox.valueChanged.connect(self.pos_update_spinbox)
 
+        #切换到预设姿势
+        self.ui.gesture_0_pushButton.clicked.connect(self.default_gesture_0_set)
+        self.ui.gesture_1_pushButton.clicked.connect(self.default_gesture_1_set)
+        self.ui.gesture_2_pushButton.clicked.connect(self.default_gesture_2_set)
+        self.ui.gesture_3_pushButton.clicked.connect(self.default_gesture_3_set)
+        self.ui.gesture_4_pushButton.clicked.connect(self.default_gesture_4_set)
+        self.ui.gesture_5_pushButton.clicked.connect(self.default_gesture_5_set)
     #用于切换端口
     def com_switch(self):
         self.ser.port = self.ser.port_list[self.ui.com_comboBox.currentIndex()][0]
@@ -96,9 +108,13 @@ class InterFace(QMainWindow):
     def com_close(self):
         self.ser.port_close()
         self.ui.com_connect_pushButton.setEnabled(True)
+
+    #用于修改移动用时
+    def time_move_set(self):
+        self.time_move = self.ui.time_spinBox.value()
+
     #用于直接设定手势
     def gesture_set(self):
-        print(self.pos)
         self.ser.gesture_set(self.cnt,self.time_move,self.ids,self.pos)
     #用于改变slider值时更新各个手的pos值
     def pos_update_slider(self):
@@ -134,6 +150,45 @@ class InterFace(QMainWindow):
         self.ui.finger_3_horizontalSlider.setValue(self.pos[3])
         self.ui.finger_4_horizontalSlider.setValue(self.pos[4])
         self.ui.finger_5_horizontalSlider.setValue(self.pos[5])
+    def pos_updata_default(self):
+        self.ui.finger_0_horizontalSlider.setValue(self.pos[0])
+        self.ui.finger_1_horizontalSlider.setValue(self.pos[1])
+        self.ui.finger_2_horizontalSlider.setValue(self.pos[2])
+        self.ui.finger_3_horizontalSlider.setValue(self.pos[3])
+        self.ui.finger_4_horizontalSlider.setValue(self.pos[4])
+        self.ui.finger_5_horizontalSlider.setValue(self.pos[5])
+        # self.ui.finger_0_spinbox.setValue(self.pos[0])
+        # self.ui.finger_1_spinbox.setValue(self.pos[1])
+        # self.ui.finger_2_spinbox.setValue(self.pos[2])
+        # self.ui.finger_3_spinbox.setValue(self.pos[3])
+        # self.ui.finger_4_spinbox.setValue(self.pos[4])
+        # self.ui.finger_5_spinbox.setValue(self.pos[5])
+
+    #用于将手切换到预设手势
+    def default_gesture_0_set(self):
+        self.pos = setting.default_pos[0]
+        self.pos_updata_default()
+        # self.gesture_set()
+    def default_gesture_1_set(self):
+        self.pos = setting.default_pos[1]
+        self.pos_updata_default()
+        # self.gesture_set()
+    def default_gesture_2_set(self):
+        self.pos = setting.default_pos[2]
+        self.pos_updata_default()
+        # self.gesture_set()
+    def default_gesture_3_set(self):
+        self.pos = setting.default_pos[3]
+        self.pos_updata_default()
+        # self.gesture_set()
+    def default_gesture_4_set(self):
+        self.pos = setting.default_pos[4]
+        self.pos_updata_default()
+        # self.gesture_set()
+    def default_gesture_5_set(self):
+        self.pos = setting.default_pos[5]
+        self.pos_updata_default()
+        # self.gesture_set()
 
 if __name__ == "__main__":
     app = QApplication([])

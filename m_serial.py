@@ -22,6 +22,7 @@ class MySerial:
         self.bps = setting.bps
         self.timex = setting.timex
     def port_connect(self):
+        print(self.portx,self.bps)
         self.m_serial = serial.Serial(self.portx,self.bps,timeout=self.timex)
 
     def port_close(self):
@@ -42,7 +43,7 @@ class MySerial:
         print(cnt,time,ids,pos)
         temp = []
         length = 5
-        time_high = time & 0xff00# 将时间拆分为高低八位
+        time_high = time & 0xff00>>8# 将时间拆分为高低八位
         time_low = time & 0xff
         for i in range(cnt):
             temp.append(ids[i])
@@ -81,6 +82,7 @@ class MySerial:
         if cmd.get(idx) == None:
             print("default gesture doesn't exist")
         self.m_serial.write(cmd.get(idx))
+
 
 
 
