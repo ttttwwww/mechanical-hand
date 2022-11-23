@@ -19,58 +19,11 @@
      <rect>
       <x>40</x>
       <y>340</y>
-      <width>213</width>
+      <width>401</width>
       <height>189</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="5" column="1">
-      <widget class="QSpinBox" name="finger_4_spinbox"/>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="finger_label_4">
-       <property name="text">
-        <string>中指</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="finger_label_7">
-       <property name="text">
-        <string>单次手势调整</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="finger_label_2">
-       <property name="text">
-        <string>拇指</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QSpinBox" name="finger_3_spinbox"/>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="finger_label_3">
-       <property name="text">
-        <string>食指</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>时间</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QSpinBox" name="finger_2_spinbox"/>
-     </item>
-     <item row="1" column="1">
-      <widget class="QSpinBox" name="finger_0_spinbox"/>
-     </item>
      <item row="5" column="0">
       <widget class="QLabel" name="finger_label_5">
        <property name="text">
@@ -85,8 +38,39 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
-      <widget class="QSpinBox" name="finger_1_spinbox"/>
+     <item row="4" column="0">
+      <widget class="QLabel" name="finger_label_4">
+       <property name="text">
+        <string>中指</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="finger_label_3">
+       <property name="text">
+        <string>食指</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="4">
+      <widget class="QSpinBox" name="time_spinBox"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="finger_label_7">
+       <property name="text">
+        <string>单次手势调整</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QSpinBox" name="finger_3_spinbox"/>
+     </item>
+     <item row="1" column="3">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>时间</string>
+       </property>
+      </widget>
      </item>
      <item row="6" column="0">
       <widget class="QLabel" name="finger_label_6">
@@ -95,16 +79,74 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
-      <widget class="QSpinBox" name="finger_5_spinbox"/>
-     </item>
-     <item row="1" column="3">
-      <widget class="QSpinBox" name="time_spinBox"/>
-     </item>
-     <item row="4" column="3">
+     <item row="4" column="4">
       <widget class="QPushButton" name="finger_set_pushbutton">
        <property name="text">
         <string>设置</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QSpinBox" name="finger_0_spinbox"/>
+     </item>
+     <item row="5" column="1">
+      <widget class="QSpinBox" name="finger_4_spinbox"/>
+     </item>
+     <item row="3" column="1">
+      <widget class="QSpinBox" name="finger_2_spinbox"/>
+     </item>
+     <item row="6" column="1">
+      <widget class="QSpinBox" name="finger_5_spinbox"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="finger_label_2">
+       <property name="text">
+        <string>拇指</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QSpinBox" name="finger_1_spinbox"/>
+     </item>
+     <item row="1" column="2">
+      <widget class="QSlider" name="finger_0_horizontalSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QSlider" name="finger_1_horizontalSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QSlider" name="finger_2_horizontalSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QSlider" name="finger_3_horizontalSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="QSlider" name="finger_4_horizontalSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="QSlider" name="finger_5_horizontalSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
@@ -113,8 +155,8 @@
    <widget class="QWidget" name="default_gesture_widget" native="true">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>360</y>
+      <x>630</x>
+      <y>150</y>
       <width>99</width>
       <height>157</height>
      </rect>
