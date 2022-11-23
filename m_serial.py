@@ -1,5 +1,6 @@
 import serial
 import setting
+import serial.tools.list_ports
 
 FRAME_HEAD = [0x55,0x55,0x00]
 CMD_MULT_SERVO_MOVE = 0x03
@@ -15,6 +16,10 @@ class MySerial:
         self.port=setting.portx
         self.timex=setting.timex
         self.m_serial =serial.Serial()
+        self.port_list = list(serial.tools.list_ports.comports())
+        self.portx = setting.portx
+        self.bps = setting.bps
+        self.timex = setting.timex
     def port_connect(self):
         self.m_serial = serial.Serial(self.portx,self.bps,timeout=self.timex)
 
