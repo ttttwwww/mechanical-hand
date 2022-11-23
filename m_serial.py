@@ -1,6 +1,7 @@
 import serial
 import setting
 import serial.tools.list_ports
+import copy
 
 FRAME_HEAD = [0x55,0x55,0x00]
 CMD_MULT_SERVO_MOVE = 0x03
@@ -24,7 +25,7 @@ class MySerial:
         self.m_serial = serial.Serial(self.portx,self.bps,timeout=self.timex)
 
     def port_close(self):
-        self.m_serial = serial.close()
+        self.m_serial.close()
     '''
         用于直接控制手势姿势
         串口通信的格式为
@@ -37,23 +38,26 @@ class MySerial:
     '''
     def gesture_set(self,cnt,time,ids,pos):
         # 设命令内容
-        length = 5
+        print("parameter")
+        print(cnt,time,ids,pos)
         temp = []
+        length = 5
         time_high = time & 0xff00# 将时间拆分为高低八位
         time_low = time & 0xff
         for i in range(cnt):
-            temp.append(hex(ids[i]))
-            temp.append(hex(pos & 0xff))
-            temp.append(hex(pos & 0xff00))
+            temp.append(ids[i])
+            temp.append(pos[i] & 0xff)
+            temp.append((pos[i] & 0xff00)>>8)
             length += 3
 
         # 填装命令
-        cmd = FRAME_HEAD
+        cmd = copy.deepcopy(FRAME_HEAD)
+        cmd[2] = length
         cmd.append(CMD_MULT_SERVO_MOVE)
-        cmd.append(hex(cnt))
-        cmd.append(hex(time_low))
-        cmd.append(hex(time_high))
-        cmd.append(temp)
+        cmd.append(cnt)
+        cmd.append(time_low)
+        cmd.append(time_high)
+        cmd.extend(temp)
         # 串口发送命令
         self.m_serial.write(cmd)
     '''
