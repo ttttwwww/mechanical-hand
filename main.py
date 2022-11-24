@@ -28,35 +28,7 @@ class InterFace(QMainWindow):
         self.ui.bps_comboBox.addItems(bps_list)
         self.ser.bps = setting.bps_list[self.ui.bps_comboBox.currentIndex()]
 
-        #滑动条和spinbox上下限初始化
-        self.ui.finger_0_horizontalSlider.setMinimum(900)
-        self.ui.finger_1_horizontalSlider.setMinimum(900)
-        self.ui.finger_2_horizontalSlider.setMinimum(900)
-        self.ui.finger_3_horizontalSlider.setMinimum(900)
-        self.ui.finger_4_horizontalSlider.setMinimum(900)
-        self.ui.finger_5_horizontalSlider.setMinimum(900)
-
-        self.ui.finger_0_horizontalSlider.setMaximum(2000)
-        self.ui.finger_1_horizontalSlider.setMaximum(2000)
-        self.ui.finger_2_horizontalSlider.setMaximum(2000)
-        self.ui.finger_3_horizontalSlider.setMaximum(2000)
-        self.ui.finger_4_horizontalSlider.setMaximum(2000)
-        self.ui.finger_5_horizontalSlider.setMaximum(2000)
-
-        self.ui.finger_0_spinbox.setMinimum(900)
-        self.ui.finger_1_spinbox.setMinimum(900)
-        self.ui.finger_2_spinbox.setMinimum(900)
-        self.ui.finger_3_spinbox.setMinimum(900)
-        self.ui.finger_4_spinbox.setMinimum(900)
-        self.ui.finger_5_spinbox.setMinimum(900)
-
-        self.ui.finger_0_spinbox.setMaximum(2000)
-        self.ui.finger_1_spinbox.setMaximum(2000)
-        self.ui.finger_2_spinbox.setMaximum(2000)
-        self.ui.finger_3_spinbox.setMaximum(2000)
-        self.ui.finger_4_spinbox.setMaximum(2000)
-        self.ui.finger_5_spinbox.setMaximum(2000)
-
+        #上下限初始化
         self.ui.time_spinBox.setMinimum(0)
         self.ui.time_spinBox.setMaximum(2000)
 
@@ -74,8 +46,6 @@ class InterFace(QMainWindow):
         self.ui.com_comboBox.currentIndexChanged.connect(self.com_switch)
         #波特率选择改变
         self.ui.bps_comboBox.currentIndexChanged.connect(self.bps_switch)
-        #手势调整按钮按下
-        self.ui.finger_set_pushbutton.clicked.connect(self.gesture_set)
         #串口控制按钮按下
         self.ui.com_connect_pushButton.clicked.connect(self.com_connect)
         self.ui.com_close_pushButton.clicked.connect(self.com_close)
@@ -83,21 +53,12 @@ class InterFace(QMainWindow):
         #移动用时spinbox改变
         self.ui.time_spinBox.valueChanged.connect(self.time_move_set)
         #手势pos改变
-        self.ui.finger_0_horizontalSlider.valueChanged.connect(self.pos_update_slider)
-        self.ui.finger_1_horizontalSlider.valueChanged.connect(self.pos_update_slider)
-        self.ui.finger_2_horizontalSlider.valueChanged.connect(self.pos_update_slider)
-        self.ui.finger_3_horizontalSlider.valueChanged.connect(self.pos_update_slider)
-        self.ui.finger_4_horizontalSlider.valueChanged.connect(self.pos_update_slider)
-        self.ui.finger_5_horizontalSlider.valueChanged.connect(self.pos_update_slider)
-
-        self.ui.finger_0_spinbox.valueChanged.connect(self.pos_update_spinbox)
-        self.ui.finger_1_spinbox.valueChanged.connect(self.pos_update_spinbox)
-        self.ui.finger_2_spinbox.valueChanged.connect(self.pos_update_spinbox)
-        self.ui.finger_3_spinbox.valueChanged.connect(self.pos_update_spinbox)
-        self.ui.finger_4_spinbox.valueChanged.connect(self.pos_update_spinbox)
-        self.ui.finger_5_spinbox.valueChanged.connect(self.pos_update_spinbox)
-
         self.ui.slider_spin_0.horizontalSlider.valueChanged.connect(self.pos_update_slider_spin_0)
+        self.ui.slider_spin_1.horizontalSlider.valueChanged.connect(self.pos_update_slider_spin_1)
+        self.ui.slider_spin_2.horizontalSlider.valueChanged.connect(self.pos_update_slider_spin_2)
+        self.ui.slider_spin_3.horizontalSlider.valueChanged.connect(self.pos_update_slider_spin_3)
+        self.ui.slider_spin_4.horizontalSlider.valueChanged.connect(self.pos_update_slider_spin_4)
+        self.ui.slider_spin_5.horizontalSlider.valueChanged.connect(self.pos_update_slider_spin_5)
         #切换到预设姿势
         self.ui.gesture_0_pushButton.clicked.connect(self.default_gesture_0_set)
         self.ui.gesture_1_pushButton.clicked.connect(self.default_gesture_1_set)
@@ -145,48 +106,8 @@ class InterFace(QMainWindow):
         self.pos[5] = self.ui.slider_spin_5.horizontalSlider.value()
         self.gesture_set()
     #用于改变slider值时更新各个手的pos值
-    def pos_update_slider(self):
-        self.pos = [
-                    self.ui.finger_0_horizontalSlider.value(),
-                    self.ui.finger_1_horizontalSlider.value(),
-                    self.ui.finger_2_horizontalSlider.value(),
-                    self.ui.finger_3_horizontalSlider.value(),
-                    self.ui.finger_4_horizontalSlider.value(),
-                    self.ui.finger_5_horizontalSlider.value()
-                    ]
-        self.ui.finger_0_spinbox.setValue(self.pos[0])
-        self.ui.finger_1_spinbox.setValue(self.pos[1])
-        self.ui.finger_2_spinbox.setValue(self.pos[2])
-        self.ui.finger_3_spinbox.setValue(self.pos[3])
-        self.ui.finger_4_spinbox.setValue(self.pos[4])
-        self.ui.finger_5_spinbox.setValue(self.pos[5])
 
-        self.gesture_set()
-    #用于改变spinbox值时更新手的pos值
-    def pos_update_spinbox(self):
-        self.pos = [
-            self.ui.finger_0_spinbox.value(),
-            self.ui.finger_1_spinbox.value(),
-            self.ui.finger_2_spinbox.value(),
-            self.ui.finger_3_spinbox.value(),
-            self.ui.finger_4_spinbox.value(),
-            self.ui.finger_5_spinbox.value()
-        ]
-        self.ui.finger_0_horizontalSlider.setValue(self.pos[0])
-        self.ui.finger_1_horizontalSlider.setValue(self.pos[1])
-        self.ui.finger_2_horizontalSlider.setValue(self.pos[2])
-        self.ui.finger_3_horizontalSlider.setValue(self.pos[3])
-        self.ui.finger_4_horizontalSlider.setValue(self.pos[4])
-        self.ui.finger_5_horizontalSlider.setValue(self.pos[5])
-    #用于将手势切换到预设值
     def pos_update_default(self):
-        # self.ui.finger_0_horizontalSlider.setValue(self.pos[0])
-        # self.ui.finger_1_horizontalSlider.setValue(self.pos[1])
-        # self.ui.finger_2_horizontalSlider.setValue(self.pos[2])
-        # self.ui.finger_3_horizontalSlider.setValue(self.pos[3])
-        # self.ui.finger_4_horizontalSlider.setValue(self.pos[4])
-        # self.ui.finger_5_horizontalSlider.setValue(self.pos[5])
-
         self.ui.slider_spin_0.horizontalSlider.setValue(self.pos[0])
         self.ui.slider_spin_1.horizontalSlider.setValue(self.pos[1])
         self.ui.slider_spin_2.horizontalSlider.setValue(self.pos[2])

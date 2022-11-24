@@ -6,152 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1469</width>
-    <height>1020</height>
+    <width>882</width>
+    <height>680</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="finger_state_widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>680</y>
-      <width>401</width>
-      <height>189</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="5" column="0">
-      <widget class="QLabel" name="finger_label_5">
-       <property name="text">
-        <string>无名指</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="finger_label">
-       <property name="text">
-        <string>手掌</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="finger_label_4">
-       <property name="text">
-        <string>中指</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="finger_label_3">
-       <property name="text">
-        <string>食指</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="4">
-      <widget class="QSpinBox" name="time_spinBox"/>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="finger_label_7">
-       <property name="text">
-        <string>单次手势调整</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QSpinBox" name="finger_3_spinbox"/>
-     </item>
-     <item row="1" column="3">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>时间</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="finger_label_6">
-       <property name="text">
-        <string>小指</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="4">
-      <widget class="QPushButton" name="finger_set_pushbutton">
-       <property name="text">
-        <string>设置</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QSpinBox" name="finger_0_spinbox"/>
-     </item>
-     <item row="5" column="1">
-      <widget class="QSpinBox" name="finger_4_spinbox"/>
-     </item>
-     <item row="3" column="1">
-      <widget class="QSpinBox" name="finger_2_spinbox"/>
-     </item>
-     <item row="6" column="1">
-      <widget class="QSpinBox" name="finger_5_spinbox"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="finger_label_2">
-       <property name="text">
-        <string>拇指</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QSpinBox" name="finger_1_spinbox"/>
-     </item>
-     <item row="1" column="2">
-      <widget class="QSlider" name="finger_0_horizontalSlider">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QSlider" name="finger_1_horizontalSlider">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <widget class="QSlider" name="finger_2_horizontalSlider">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="2">
-      <widget class="QSlider" name="finger_3_horizontalSlider">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="2">
-      <widget class="QSlider" name="finger_4_horizontalSlider">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="2">
-      <widget class="QSlider" name="finger_5_horizontalSlider">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QWidget" name="default_gesture_widget" native="true">
     <property name="geometry">
      <rect>
@@ -275,7 +137,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="finger_state_widget_2" native="true">
+   <widget class="QWidget" name="finger_state_widget" native="true">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -300,7 +162,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QSpinBox" name="time_spinBox_2"/>
+      <widget class="QSpinBox" name="time_spinBox"/>
      </item>
      <item row="2" column="0" colspan="2">
       <widget class="SliderAndSpin" name="slider_spin_0" native="true">
@@ -370,7 +232,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1469</width>
+     <width>882</width>
      <height>21</height>
     </rect>
    </property>
