@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMainWindow,QApplication
 import mainwindow
 import setting
 import m_serial
-
+import sys
 
 class InterFace(QMainWindow):
     def __init__(self):
@@ -59,6 +59,14 @@ class InterFace(QMainWindow):
 
         self.ui.time_spinBox.setMinimum(0)
         self.ui.time_spinBox.setMaximum(2000)
+
+        #滑动条和spinbox标签命名
+        self.ui.slider_spin_0.label.setText("手掌")
+        self.ui.slider_spin_1.label.setText("拇指")
+        self.ui.slider_spin_2.label.setText("食指")
+        self.ui.slider_spin_3.label.setText("中指")
+        self.ui.slider_spin_4.label.setText("无名指")
+        self.ui.slider_spin_5.label.setText("小指")
         '''
         槽函数与信号连接
         '''
@@ -89,6 +97,7 @@ class InterFace(QMainWindow):
         self.ui.finger_4_spinbox.valueChanged.connect(self.pos_update_spinbox)
         self.ui.finger_5_spinbox.valueChanged.connect(self.pos_update_spinbox)
 
+        self.ui.slider_spin_0.horizontalSlider.valueChanged.connect(self.pos_update_slider_spin_0)
         #切换到预设姿势
         self.ui.gesture_0_pushButton.clicked.connect(self.default_gesture_0_set)
         self.ui.gesture_1_pushButton.clicked.connect(self.default_gesture_1_set)
@@ -116,6 +125,25 @@ class InterFace(QMainWindow):
     #用于直接设定手势
     def gesture_set(self):
         self.ser.gesture_set(self.cnt,self.time_move,self.ids,self.pos)
+    #改变slider_spin值时更新对应手的值
+    def pos_update_slider_spin_0(self):
+        self.pos[0] = self.ui.slider_spin_0.horizontalSlider.value()
+        self.gesture_set()
+    def pos_update_slider_spin_1(self):
+        self.pos[1] = self.ui.slider_spin_1.horizontalSlider.value()
+        self.gesture_set()
+    def pos_update_slider_spin_2(self):
+        self.pos[2] = self.ui.slider_spin_2.horizontalSlider.value()
+        self.gesture_set()
+    def pos_update_slider_spin_3(self):
+        self.pos[3] = self.ui.slider_spin_3.horizontalSlider.value()
+        self.gesture_set()
+    def pos_update_slider_spin_4(self):
+        self.pos[4] = self.ui.slider_spin_4.horizontalSlider.value()
+        self.gesture_set()
+    def pos_update_slider_spin_5(self):
+        self.pos[5] = self.ui.slider_spin_5.horizontalSlider.value()
+        self.gesture_set()
     #用于改变slider值时更新各个手的pos值
     def pos_update_slider(self):
         self.pos = [
@@ -150,45 +178,42 @@ class InterFace(QMainWindow):
         self.ui.finger_3_horizontalSlider.setValue(self.pos[3])
         self.ui.finger_4_horizontalSlider.setValue(self.pos[4])
         self.ui.finger_5_horizontalSlider.setValue(self.pos[5])
-    def pos_updata_default(self):
-        self.ui.finger_0_horizontalSlider.setValue(self.pos[0])
-        self.ui.finger_1_horizontalSlider.setValue(self.pos[1])
-        self.ui.finger_2_horizontalSlider.setValue(self.pos[2])
-        self.ui.finger_3_horizontalSlider.setValue(self.pos[3])
-        self.ui.finger_4_horizontalSlider.setValue(self.pos[4])
-        self.ui.finger_5_horizontalSlider.setValue(self.pos[5])
-        # self.ui.finger_0_spinbox.setValue(self.pos[0])
-        # self.ui.finger_1_spinbox.setValue(self.pos[1])
-        # self.ui.finger_2_spinbox.setValue(self.pos[2])
-        # self.ui.finger_3_spinbox.setValue(self.pos[3])
-        # self.ui.finger_4_spinbox.setValue(self.pos[4])
-        # self.ui.finger_5_spinbox.setValue(self.pos[5])
+    #用于将手势切换到预设值
+    def pos_update_default(self):
+        # self.ui.finger_0_horizontalSlider.setValue(self.pos[0])
+        # self.ui.finger_1_horizontalSlider.setValue(self.pos[1])
+        # self.ui.finger_2_horizontalSlider.setValue(self.pos[2])
+        # self.ui.finger_3_horizontalSlider.setValue(self.pos[3])
+        # self.ui.finger_4_horizontalSlider.setValue(self.pos[4])
+        # self.ui.finger_5_horizontalSlider.setValue(self.pos[5])
+
+        self.ui.slider_spin_0.horizontalSlider.setValue(self.pos[0])
+        self.ui.slider_spin_1.horizontalSlider.setValue(self.pos[1])
+        self.ui.slider_spin_2.horizontalSlider.setValue(self.pos[2])
+        self.ui.slider_spin_3.horizontalSlider.setValue(self.pos[3])
+        self.ui.slider_spin_4.horizontalSlider.setValue(self.pos[4])
+        self.ui.slider_spin_5.horizontalSlider.setValue(self.pos[5])
 
     #用于将手切换到预设手势
     def default_gesture_0_set(self):
         self.pos = setting.default_pos[0]
-        self.pos_updata_default()
-        # self.gesture_set()
+        self.pos_update_default()
     def default_gesture_1_set(self):
         self.pos = setting.default_pos[1]
-        self.pos_updata_default()
-        # self.gesture_set()
+        self.pos_update_default()
     def default_gesture_2_set(self):
         self.pos = setting.default_pos[2]
-        self.pos_updata_default()
-        # self.gesture_set()
+        self.pos_update_default()
     def default_gesture_3_set(self):
         self.pos = setting.default_pos[3]
-        self.pos_updata_default()
-        # self.gesture_set()
+        self.pos_update_default()
     def default_gesture_4_set(self):
         self.pos = setting.default_pos[4]
-        self.pos_updata_default()
-        # self.gesture_set()
+        self.pos_update_default()
     def default_gesture_5_set(self):
         self.pos = setting.default_pos[5]
-        self.pos_updata_default()
-        # self.gesture_set()
+        self.pos_update_default()
+
 
 if __name__ == "__main__":
     app = QApplication([])

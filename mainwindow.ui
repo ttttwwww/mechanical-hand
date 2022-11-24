@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1469</width>
+    <height>1020</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QWidget" name="finger_state_widget" native="true">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>340</y>
+      <x>150</x>
+      <y>680</y>
       <width>401</width>
       <height>189</height>
      </rect>
@@ -275,25 +275,94 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="widget_2" native="true">
+   <widget class="QWidget" name="finger_state_widget_2" native="true">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>40</y>
-      <width>120</width>
-      <height>80</height>
+      <x>100</x>
+      <y>350</y>
+      <width>318</width>
+      <height>280</height>
      </rect>
     </property>
-   </widget>
-   <widget class="Ui_SliderAndSpin" name="slider_spin_0" native="true">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>170</y>
-      <width>120</width>
-      <height>80</height>
-     </rect>
-    </property>
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="0">
+      <widget class="QLabel" name="finger_label_12">
+       <property name="text">
+        <string>单次手势调整</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>时间</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QSpinBox" name="time_spinBox_2"/>
+     </item>
+     <item row="2" column="0" colspan="2">
+      <widget class="SliderAndSpin" name="slider_spin_0" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>30</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" colspan="2">
+      <widget class="SliderAndSpin" name="slider_spin_1" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>30</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0" colspan="2">
+      <widget class="SliderAndSpin" name="slider_spin_2" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>30</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0" colspan="2">
+      <widget class="SliderAndSpin" name="slider_spin_3" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>30</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0" colspan="2">
+      <widget class="SliderAndSpin" name="slider_spin_4" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>30</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0" colspan="2">
+      <widget class="SliderAndSpin" name="slider_spin_5" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>30</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -301,8 +370,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>23</height>
+     <width>1469</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -310,7 +379,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Ui_SliderAndSpin</class>
+   <class>SliderAndSpin</class>
    <extends>QWidget</extends>
    <header>sliderandspin</header>
    <container>1</container>
