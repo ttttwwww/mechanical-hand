@@ -18,12 +18,10 @@ class MySerial:
         self.timex=setting.timex
         self.m_serial =serial.Serial()
         self.port_list = list(serial.tools.list_ports.comports())
-        self.portx = setting.portx
-        self.bps = setting.bps
-        self.timex = setting.timex
+
     def port_connect(self):
-        print(self.portx,self.bps)
-        self.m_serial = serial.Serial(self.portx,self.bps,timeout=self.timex)
+        print(self.port,self.bps)
+        self.m_serial = serial.Serial(self.port ,self.bps,timeout=self.timex)
 
     def port_close(self):
         self.m_serial.close()

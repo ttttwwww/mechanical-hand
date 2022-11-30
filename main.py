@@ -66,7 +66,7 @@ class InterFace(QMainWindow):
         self.ui.gesture_3_pushButton.clicked.connect(self.default_gesture_3_set)
         self.ui.gesture_4_pushButton.clicked.connect(self.default_gesture_4_set)
         self.ui.gesture_5_pushButton.clicked.connect(self.default_gesture_5_set)
-    #用于切换端口
+    #用于切换串口
     def com_switch(self):
         self.ser.port = self.ser.port_list[self.ui.com_comboBox.currentIndex()][0]
     #用于切换波特率
