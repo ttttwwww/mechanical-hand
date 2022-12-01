@@ -4,22 +4,34 @@ import mainwindow
 import setting
 import m_serial
 import sys
+import socket
+import network
 
 class InterFace(QMainWindow):
     def __init__(self):
         super(InterFace, self).__init__()
         self.ui = mainwindow.Ui_MainWindow()
+        self.parameter_init()
+        self.ui_init()
+    # region 参数初始化
+    def parameter_init(self):
         self.ui.setupUi(self)
+        #初始化串口
         self.ser = m_serial.MySerial()
-        self.ids = [6,1,2,3,4,5]
-        self.pos = [900,900,900,900,900,900]
+        # 初始化网络
+        # 建立ipv4连接
+        self.tcp_server = network.NetWork()
+        self.tcp_server.set_address(setting.net_address)
+        self.tcp_server.set_port(setting.net_port)
+        #初始化指令参数
+        self.ids = [6, 1, 2, 3, 4, 5]
+        self.pos = [900, 900, 900, 900, 900, 900]
         self.cnt = 6
         self.time_move = 0
-        self.ui_init()
+    # endregion
+
     def ui_init(self):
-        '''
-        窗口组件初始化
-        '''
+        # region 串口组件初始化
         #串口下拉选单初始化
         for i in range(len(self.ser.port_list)):
             self.ui.com_comboBox.addItem(self.ser.port_list[i][0])
@@ -39,9 +51,16 @@ class InterFace(QMainWindow):
         self.ui.slider_spin_3.label.setText("中指")
         self.ui.slider_spin_4.label.setText("无名指")
         self.ui.slider_spin_5.label.setText("小指")
-        '''
-        槽函数与信号连接
-        '''
+        # endregion
+
+        # region 网络组件初始化
+        self.ui.tcp_server_ip_line_Edit.setText(str(setting.net_address))
+        self.ui.tcp_server_port_line_Edit.setText(str(setting.net_port))
+
+        # endregion
+
+        # region 槽函数与信号连接
+        # region 串口部分
         #串口选择改变
         self.ui.com_comboBox.currentIndexChanged.connect(self.com_switch)
         #波特率选择改变
@@ -49,7 +68,9 @@ class InterFace(QMainWindow):
         #串口控制按钮按下
         self.ui.com_connect_pushButton.clicked.connect(self.com_connect)
         self.ui.com_close_pushButton.clicked.connect(self.com_close)
+        # endregion
 
+        # region 数据调整部分
         #移动用时spinbox改变
         self.ui.time_spinBox.valueChanged.connect(self.time_move_set)
         #手势pos改变
@@ -66,6 +87,16 @@ class InterFace(QMainWindow):
         self.ui.gesture_3_pushButton.clicked.connect(self.default_gesture_3_set)
         self.ui.gesture_4_pushButton.clicked.connect(self.default_gesture_4_set)
         self.ui.gesture_5_pushButton.clicked.connect(self.default_gesture_5_set)
+        # endregion
+
+        # region 网络部分
+        self.ui.tcp_server_setup_pushButton.clicked.connect(self.tcp_server_setup)
+        self.tcp_server.tcp_client_connected.connect(self.tcp_client_connected)
+        # endregion
+        # endregion
+
+
+    # region 设定串口相关函数
     #用于切换串口
     def com_switch(self):
         self.ser.port = self.ser.port_list[self.ui.com_comboBox.currentIndex()][0]
@@ -78,12 +109,11 @@ class InterFace(QMainWindow):
     def com_close(self):
         self.ser.port_close()
         self.ui.com_connect_pushButton.setEnabled(True)
+    # endregion功能想
 
-    #用于修改移动用时
+    # region 设定手势相关函数
     def time_move_set(self):
         self.time_move = self.ui.time_spinBox.value()
-
-    #用于直接设定手势
     def gesture_set(self):
         self.ser.gesture_set(self.cnt,self.time_move,self.ids,self.pos)
     #改变slider_spin值时更新对应手的值
@@ -134,7 +164,23 @@ class InterFace(QMainWindow):
     def default_gesture_5_set(self):
         self.pos = setting.default_pos[5]
         self.pos_update_default()
+    #endregion
+    #region 设定网络相关函数
+    def tcp_server_setup(self):
+        self.tcp_server_parameter_set()
+        self.tcp_server.tcp_server_setup()
+    def tcp_server_parameter_set(self):
+        self.tcp_server.set_address(self.ui.tcp_server_ip_line_Edit.text())
+        print("server address is")
+        print(self.tcp_server.server_address)
+        self.tcp_server.set_port(int(self.ui.tcp_server_port_line_Edit.text()))
+        print("port is")
+        print(self.tcp_server.server_port)
+    #连接到端口后改变combobox中的值
+    def tcp_client_connected(self,val):
+        self.ui.tcp_server_connected_ip_comboBox.addItem(val)
 
+    #endregion
 
 if __name__ == "__main__":
     app = QApplication([])
