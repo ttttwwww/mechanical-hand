@@ -92,6 +92,7 @@ class InterFace(QMainWindow):
         # region 网络部分
         self.ui.tcp_server_setup_pushButton.clicked.connect(self.tcp_server_setup)
         self.tcp_server.tcp_client_connected.connect(self.tcp_client_connected)
+
         # endregion
         # endregion
 
@@ -115,6 +116,7 @@ class InterFace(QMainWindow):
     def time_move_set(self):
         self.time_move = self.ui.time_spinBox.value()
     def gesture_set(self):
+        
         self.ser.gesture_set(self.cnt,self.time_move,self.ids,self.pos)
     #改变slider_spin值时更新对应手的值
     def pos_update_slider_spin_0(self):
@@ -169,6 +171,7 @@ class InterFace(QMainWindow):
     def tcp_server_setup(self):
         self.tcp_server_parameter_set()
         self.tcp_server.tcp_server_setup()
+        self.tcp_server.start()
     def tcp_server_parameter_set(self):
         self.tcp_server.set_address(self.ui.tcp_server_ip_line_Edit.text())
         print("server address is")
@@ -178,7 +181,9 @@ class InterFace(QMainWindow):
         print(self.tcp_server.server_port)
     #连接到端口后改变combobox中的值
     def tcp_client_connected(self,val):
-        self.ui.tcp_server_connected_ip_comboBox.addItem(val)
+        print("client connect")
+        item = str(val[0]) + ":" + str(val[1])
+        self.ui.tcp_server_connected_ip_comboBox.addItem(item)
 
     #endregion
 

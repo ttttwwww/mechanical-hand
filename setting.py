@@ -1,6 +1,11 @@
-'''
-串口设置
-'''
+
+#region 工作模式
+mode = {
+    0:"serial",
+    1:"net"
+}
+
+#region 串口设置
 #端口名
 portx = "COM3"
 #波特率
@@ -20,10 +25,11 @@ default_pos =[[900, 2000, 900, 900, 900, 900],
               ]
 
 ids = [6,1,2,3,4,5]
-'''
-网络控制部分
-'''
+#endregion
+
+#region 网络设置
 #本机ip
 net_address = "192.168.137.1"
 #本机服务端端口
 net_port = 8080
+#endregion
