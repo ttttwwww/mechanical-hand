@@ -36,7 +36,7 @@ class NetWork(QThread):
         self.tcp_server.listen(128)
 
     def send(self,message):
-        self.clients[self.id_client].load_message(message)
+        self.message = message
 
     def gesture_set(self,cnt,time,ids,pos):
         print("sent by net")
@@ -72,6 +72,9 @@ class NetWork(QThread):
             client.start()
             self.clients.append(client)
             self.tcp_client_connected.emit(client_address)
+            if self.message != None:
+                print(self.id_client)
+                self.clients[self.id_client].load_message(self.message)
 
 
 class ClientThread(QThread):
@@ -85,13 +88,39 @@ class ClientThread(QThread):
     def load_message(self,message):
         self.message = message
 
+    def gesture_set(self,cnt,time,ids,pos):
+        print("sent by net")
+        print("parameter")
+        print(cnt, time, ids, pos)
+        temp = []
+        length = 5
+        time_high = time & 0xff00 >> 8  # 将时间拆分为高低八位
+        time_low = time & 0xff
+        for i in range(cnt):
+            temp.append(ids[i])
+            temp.append(pos[i] & 0xff)
+            temp.append((pos[i] & 0xff00) >> 8)
+            length += 3
+
+        # 填装命令
+        cmd = copy.deepcopy(FRAME_HEAD)
+        cmd[2] = length
+        cmd.append(CMD_MULT_SERVO_MOVE)
+        cmd.append(cnt)
+        cmd.append(time_low)
+        cmd.append(time_high)
+        cmd.extend(temp)
+        # 串口发送命令
+        print(cmd)
+        self.message = cmd
+
     def run(self):
         while True:
-            recv_data = self.client.recv(4096)
+            # recv_data = self.client.recv(4096)
             # 6 有消息就回复数据，消息长度为0就是说明客户端下线了
-            if recv_data:
-                print("客户端是:", self.address,self.port)
-                print("客户端发来的消息是:", recv_data.decode())
-            if self.message != None:
-                self.client.send(self.message)
+            # if recv_data:
+            #     print("客户端是:", self.address,self.port)
+            #     print("客户端发来的消息是:", recv_data.decode())
+            if self.message is not None:
+                self.client.send(bytes(self.message))
                 self.message = None

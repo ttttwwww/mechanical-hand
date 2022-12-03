@@ -28,12 +28,7 @@ class InterFace(QMainWindow):
         # endregion
         self.ui.setupUi(self)
         self.ui_init()
-   
-        # region 初始化网络
-        self.tcp_server = network.NetWork()
-        self.tcp_server.set_address(setting.net_address)
-        self.tcp_server.set_port(setting.net_port)
-        # endregion
+
         # region 初始化指令参数
         self.ids = [6, 1, 2, 3, 4, 5]
         self.pos = [900, 900, 900, 900, 900, 900]
@@ -136,7 +131,7 @@ class InterFace(QMainWindow):
         if self.mode == MODE_SERIAL:
             self.ser.gesture_set(self.cnt, self.time_move, self.ids, self.pos)
         elif self.mode == MODE_NET:
-            self.tcp_server.gesture_set(self.cnt, self.time_move, self.ids, self.pos)
+            self.tcp_server.clients[self.tcp_server.id_client].gesture_set(self.cnt, self.time_move, self.ids, self.pos)
         else:
             print("mode=",self.mode,"mode error")
 
@@ -205,8 +200,6 @@ class InterFace(QMainWindow):
         print(self.tcp_server.server_port)
     #连接到端口后改变combobox中的值
     def tcp_client_connected(self,val):
-        print("client connect")
-        print("val=",val)
         item = str(val[0]) + ":" + str(val[1])
         self.ui.tcp_server_connected_ip_comboBox.addItem(item)
     # 选中的client改变时，发送目标发生变化
