@@ -1,21 +1,24 @@
 
-#region 工作模式
-mode = {
-    0:"serial",
-    1:"net"
+# region 工作模式
+MODE_SERIAL = 0
+MODE_NET = 1
+mode_list = {
+    MODE_SERIAL: "self.ser.gesture_set",
+    MODE_NET: "self.tcp_server.gesture_set"
 }
+# endregion
 
-#region 串口设置
-#端口名
+# region 串口设置
+# 端口名
 portx = "COM3"
-#波特率
+# 波特率
 bps = 9600
-bps_list = [4800,9600,14400,19200,38400,57600,115200]
-#超时时间
+bps_list = [4800, 9600, 14400, 19200, 38400, 57600, 115200]
+# 超时时间
 timex = 5
 
 
-#预设姿势
+# 预设姿势
 default_pos =[[900, 2000, 900, 900, 900, 900],
               [900, 900, 900, 900, 900, 900],
               [900, 2000, 2000, 900, 900, 900],
@@ -24,12 +27,12 @@ default_pos =[[900, 2000, 900, 900, 900, 900],
               [900, 2000, 900, 900, 900, 2000]
               ]
 
-ids = [6,1,2,3,4,5]
-#endregion
+ids = [6, 1, 2, 3, 4, 5]
+# endregion
 
-#region 网络设置
-#本机ip
+# region 网络设置
+# 本机ip
 net_address = "192.168.137.1"
-#本机服务端端口
+# 本机服务端端口
 net_port = 8080
-#endregion
+# endregion
