@@ -6,6 +6,7 @@ import m_serial
 import sys
 import socket
 import network
+import copy
 
 MODE_SERIAL = 0
 MODE_NET = 1
@@ -167,22 +168,22 @@ class InterFace(QMainWindow):
 
     #用于将手切换到预设手势
     def default_gesture_0_set(self):
-        self.pos = setting.default_pos[0]
+        self.pos = copy.deepcopy(setting.default_pos[0])
         self.pos_update_default()
     def default_gesture_1_set(self):
-        self.pos = setting.default_pos[1]
+        self.pos = copy.deepcopy(setting.default_pos[1])
         self.pos_update_default()
     def default_gesture_2_set(self):
-        self.pos = setting.default_pos[2]
+        self.pos = copy.deepcopy(setting.default_pos[2])
         self.pos_update_default()
     def default_gesture_3_set(self):
-        self.pos = setting.default_pos[3]
+        self.pos = copy.deepcopy(setting.default_pos[3])
         self.pos_update_default()
     def default_gesture_4_set(self):
-        self.pos = setting.default_pos[4]
+        self.pos = copy.deepcopy(setting.default_pos[4])
         self.pos_update_default()
     def default_gesture_5_set(self):
-        self.pos = setting.default_pos[5]
+        self.pos = copy.deepcopy(setting.default_pos[5])
         self.pos_update_default()
     #endregion
     #region 设定网络相关函数
