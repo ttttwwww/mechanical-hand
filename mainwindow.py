@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from sliderandspin import SliderAndSpin
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -41,10 +41,11 @@ class Ui_MainWindow(object):
         self.gesture_5_pushButton = QtWidgets.QPushButton(self.default_gesture_widget)
         self.gesture_5_pushButton.setObjectName("gesture_5_pushButton")
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.gesture_5_pushButton)
-        self.widget = QtWidgets.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(50, 60, 301, 241))
-        self.widget.setObjectName("widget")
-        self.label = QtWidgets.QLabel(self.widget)
+        self.hand_widget = Hand(self.centralwidget)
+        self.hand_widget.setGeometry(QtCore.QRect(50, 60, 350, 300))
+        self.hand_widget.setMinimumSize(QtCore.QSize(350, 300))
+        self.hand_widget.setObjectName("hand_widget")
+        self.label = QtWidgets.QLabel(self.hand_widget)
         self.label.setGeometry(QtCore.QRect(110, 10, 71, 16))
         self.label.setObjectName("label")
         self.com_widget = QtWidgets.QWidget(self.centralwidget)
@@ -140,7 +141,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.tcp_server_setup_pushButton, 2, 0, 1, 2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1073, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1073, 22))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -170,4 +171,5 @@ class Ui_MainWindow(object):
         self.label_7.setText(_translate("MainWindow", "已连接设备ip"))
         self.label_6.setText(_translate("MainWindow", "Port"))
         self.tcp_server_setup_pushButton.setText(_translate("MainWindow", "建立tcpserver"))
-
+from hand import Hand
+from sliderandspin import SliderAndSpin

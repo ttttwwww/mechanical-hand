@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/hand">
+        <file>source/spot.png</file>
+        <file>source/下载.jfif</file>
+    </qresource>
+</RCC>

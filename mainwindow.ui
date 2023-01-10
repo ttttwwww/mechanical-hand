@@ -68,14 +68,20 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="widget" native="true">
+   <widget class="Hand" name="hand_widget" native="true">
     <property name="geometry">
      <rect>
       <x>50</x>
       <y>60</y>
-      <width>301</width>
-      <height>241</height>
+      <width>350</width>
+      <height>300</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>350</width>
+      <height>300</height>
+     </size>
     </property>
     <widget class="QLabel" name="label">
      <property name="geometry">
@@ -289,7 +295,7 @@
      <x>0</x>
      <y>0</y>
      <width>1073</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -300,6 +306,12 @@
    <class>SliderAndSpin</class>
    <extends>QWidget</extends>
    <header>sliderandspin</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Hand</class>
+   <extends>QWidget</extends>
+   <header location="global">hand.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

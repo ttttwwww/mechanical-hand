@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/hand">
+        <file>Resources/hand.png</file>
+    </qresource>
+    <qresource prefix="/mark">
+        <file>Resources/mark.png</file>
+    </qresource>
+</RCC>
